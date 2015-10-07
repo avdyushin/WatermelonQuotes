@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="screen_main"
+    >
+
+	<PreferenceCategory 
+		android:title="@string/preinstalled"
+		android:key="buildin_category">
+		
+		<CheckBoxPreference 
+			android:key="src_bible_en"			
+			android:title="@string/en_bible"
+			android:summary="@string/en_bible_sum"
+			android:defaultValue="true"
+		/>
+		
+		<CheckBoxPreference 
+			android:key="src_bible_ru"
+			android:title="@string/ru_bible"
+			android:summary="@string/ru_bible_sum"
+			android:defaultValue="false"
+		/>
+		
+		<CheckBoxPreference 
+			android:key="src_bible_cn"
+			android:title="@string/cn_bible"
+			android:summary="@string/cn_bible_sum"
+			android:defaultValue="false"
+		/>
+
+        <CheckBoxPreference
+            android:key="src_classics_biter"
+            android:title="@string/biter_classic"
+            android:summary="@string/biter_classic_sum"
+            android:defaultValue="false"
+            />
+
+    </PreferenceCategory>
+
+	<PreferenceCategory
+		android:title="@string/external_storage"
+		android:key="external_category">
+
+ 
+	    <PreferenceScreen 
+                android:title="@string/no_quotes_installed" 
+                android:summary="" 
+                android:key="external_help"> 
+        </PreferenceScreen>
+
+	</PreferenceCategory>		
+	
+<!-- 		
+		<PreferenceScreen 
+                android:title="Installed quotes" 
+                android:summary="Quotes on you External Storage" 
+                android:key="external">
+                
+                <PreferenceCategory 
+					android:title="Quotes to use"
+					android:key="external_category">
+				</PreferenceCategory>
+				
+        </PreferenceScreen>
+-->
+
+	<PreferenceCategory 
+		android:title="@string/appearance"
+		android:key="Appearance_category">
+		
+	    
+		<com.devfruit.watermelon.ColorPickerPreference 
+			android:key="foreground"
+			android:title="@string/pref_foreground" 
+			android:summary="@string/pref_foreground_sum"
+			alphaSlider="true" 
+			android:defaultValue="#EEFFFFFF"
+		/>
+		
+		<com.devfruit.watermelon.ColorPickerPreference 
+			android:key="background"
+			android:title="@string/pref_background" 
+			android:summary="@string/pref_background_sum"
+			alphaSlider="true" 
+			android:defaultValue="#80000000"
+		/>
+		
+<!-- 		<PreferenceScreen 
+                android:title="@string/background_color" 
+                android:summary="Background color #20000000" 
+                android:key="background_picker"> 
+        </PreferenceScreen>
+        
+		<PreferenceScreen 
+                android:title="@string/text_color" 
+                android:summary="Text color #FFFFFFFF" 
+                android:key="foreground_picker"> 
+        </PreferenceScreen> -->
+		
+	</PreferenceCategory>
+<!-- 	
+	<PreferenceCategory 
+		android:title="Help"
+		android:key="help_category">
+		
+		<PreferenceScreen 
+                android:title="External quotes" 
+                android:summary="You can add you own quotes" 
+                android:key="extsource_help"
+                android:selectable="false"> 
+        </PreferenceScreen>
+		
+	</PreferenceCategory>
+-->
+<!--  
+		<ListPreference 
+			android:key="updates_interval"
+			android:title="Updates interval"
+			android:summary="Define how often updates will be performed"
+			android:defaultValue="1000" 
+			android:entries="@array/updateInterval"
+			android:entryValues="@array/updateIntervalValues"
+			android:dependency="perform_updates"
+		/>
+			
+	</PreferenceCategory>
+
+	<PreferenceCategory 
+		android:title="Second Category"
+		android:key="second_category">
+
+		<EditTextPreference
+			android:key="welcome_message"
+			android:title="Welcome Message" 
+			android:summary="Define the Welcome message to be shown"
+			android:dialogTitle="Welcome Message"
+			android:dialogMessage="Provide a message"	
+			android:defaultValue="Default welcome message" />
+-->
+	
+	
+</PreferenceScreen>
