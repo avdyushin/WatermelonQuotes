@@ -18,6 +18,7 @@ gen/
 .idea/tasks.xml
 .idea/libraries
 .idea/gradle.xml
+.idea/vcs.xml
 build/
 /*/build/
 
