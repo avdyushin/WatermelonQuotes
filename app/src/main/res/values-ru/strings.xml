@@ -3,9 +3,8 @@
     
     <string name="app_name">Цитаты Watermelon</string>
     
-    <string name="widget_4x1">Watermelon 4x1</string>
-    <string name="widget_4x2">Watermelon 4x2</string>
-    
+    <string name="widget_name">Watermelon</string>
+
     <string name="settings">Настройки</string>
     <string name="preinstalled">Встроенные цитаты</string>
     <string name="external_storage">Цитаты на карте памяти</string>

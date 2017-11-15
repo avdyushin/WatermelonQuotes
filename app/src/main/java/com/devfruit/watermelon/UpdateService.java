@@ -159,7 +159,7 @@ public class UpdateService extends Service {
 			
 		} else {
 
-			ComponentName thisWidget = new ComponentName(getApplicationContext(), WidgetProviderSmall.class);
+			ComponentName thisWidget = new ComponentName(getApplicationContext(), WidgetProvider.class);
 			mAllWidgetsIds = appWidgetManager.getAppWidgetIds(thisWidget);
 
 			for (int widgetId : mAllWidgetsIds) {

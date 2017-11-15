@@ -3,9 +3,8 @@
     
     <string name="app_name">Watermelon Quotes</string>
     
-    <string name="widget_4x1">Watermelon 4x1</string>
-    <string name="widget_4x2">Watermelon 4x2</string>
-    
+    <string name="widget_name">Watermelon</string>
+
     <string name="settings">Settings</string>
     <string name="preinstalled">Preinstalled quotes</string>
     <string name="external_storage">External storage quotes</string>
