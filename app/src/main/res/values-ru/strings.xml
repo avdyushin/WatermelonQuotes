@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <string name="app_name">Цитаты Watermelon</string>
-    
+
     <string name="widget_name">Watermelon</string>
 
     <string name="settings">Настройки</string>
@@ -20,27 +20,26 @@
     <string name="installed_quotes">Установлены цитаты</string>
     <string name="found_quotes">Найдено цитат: %1$d</string>
     <string name="howto_install">Для установки виджета перейдите в виджеты и перетащите виджет watermelon на ваш экран.</string>
-    
+
     <!-- Color Picker -->
     <string name="dialog_color_picker">Выбор цвета</string>
     <string name="press_color_to_apply">Нажмите на цвета для выбора</string>
-    
-    
-	<string name="pref_background">Цвет фона</string>
-	<string name="pref_background_sum">Цвет: %1$s</string>
 
-	<string name="pref_foreground">Цвет текста</string>
-	<string name="pref_foreground_sum">Цвет: %1$s</string>
-	
-	<!--  Quotes -->
-	<string name="en_bible">Английская Библия</string>
-	<string name="en_bible_sum">Цитаты из Библии KJV</string>
+    <string name="pref_background">Цвет фона</string>
+    <string name="pref_background_sum">Цвет: %1$s</string>
 
-	<string name="ru_bible">Русская Библия</string>
-	<string name="ru_bible_sum">Цитаты из синодального перевода</string>
-	
-	<string name="cn_bible">Китайская Библия</string>
-	<string name="cn_bible_sum">Цитаты из Библии CNV</string>
+    <string name="pref_foreground">Цвет текста</string>
+    <string name="pref_foreground_sum">Цвет: %1$s</string>
+
+    <!--  Quotes -->
+    <string name="en_bible">Английская Библия</string>
+    <string name="en_bible_sum">Цитаты из Библии KJV</string>
+
+    <string name="ru_bible">Русская Библия</string>
+    <string name="ru_bible_sum">Цитаты из синодального перевода</string>
+
+    <string name="cn_bible">Китайская Библия</string>
+    <string name="cn_bible_sum">Цитаты из Библии CNV</string>
 
     <string name="biter_classic">Классика</string>
     <string name="biter_classic_sum">Цитаты классиков</string>
