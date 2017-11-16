@@ -11,7 +11,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.devfruit.watermelon.R;
 import com.devfruit.watermelon.wqColorPickerDialog.OnColorChangedListener;
 
 import android.app.AlertDialog;
@@ -33,11 +32,10 @@ import android.preference.PreferenceScreen;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class wqPreference extends PreferenceActivity implements OnPreferenceClickListener, OnColorChangedListener {
+public class SettingsActivity extends PreferenceActivity implements OnPreferenceClickListener, OnColorChangedListener {
     
 	private static final String LOG = "com.devfruit.wq";
 	public static final String DOTPATH = "watermelon";
@@ -104,7 +102,7 @@ public class wqPreference extends PreferenceActivity implements OnPreferenceClic
 			// Commit the edits!
     		editor.commit();
 			
-			final Context context = wqPreference.this;
+			final Context context = SettingsActivity.this;
 			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 			UpdateService.updateAppWidget(context, appWidgetManager, mAppWidgetId);
 

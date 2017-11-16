@@ -14,7 +14,6 @@ import java.util.Random;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +22,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 //import android.graphics.Color;
-import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Typeface;
@@ -32,9 +30,6 @@ import android.os.IBinder;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
-import android.util.Log;
-import android.widget.RemoteViews;
-import com.devfruit.watermelon.R;
 
 public class UpdateService extends Service {
 	
@@ -136,42 +131,30 @@ public class UpdateService extends Service {
 	    
 	    return bitmap;
 
-    }	
+    }
 
 	@Override
-	public void onCreate() {
+	public int onStartCommand(Intent intent, int flags, int startId) {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this.getApplicationContext());
+        int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
 
-		super.onCreate();
+        if( appWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID ) {
 
-	}
-	
-	@Override
-	public void onStart(Intent intent, int startId) {
-		
-		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this.getApplicationContext());
+            // Update only this widget
+            updateAppWidget(this.getApplicationContext(), appWidgetManager, appWidgetId);
 
-		int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+        } else {
 
-		if( appWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID ) {
-			
-			// Update only this widget
-			updateAppWidget(this.getApplicationContext(), appWidgetManager, appWidgetId);
-			
-		} else {
+            ComponentName thisWidget = new ComponentName(getApplicationContext(), WidgetProvider.class);
+            mAllWidgetsIds = appWidgetManager.getAppWidgetIds(thisWidget);
 
-			ComponentName thisWidget = new ComponentName(getApplicationContext(), WidgetProvider.class);
-			mAllWidgetsIds = appWidgetManager.getAppWidgetIds(thisWidget);
+            for (int widgetId : mAllWidgetsIds) {
+                updateAppWidget(this.getApplicationContext(), appWidgetManager, widgetId);
+            }
 
-			for (int widgetId : mAllWidgetsIds) {
-				updateAppWidget(this.getApplicationContext(), appWidgetManager, widgetId);
-			}
-
-		}
-		
-		stopSelf();
-		super.onStart(intent, startId);
-
-	}
+        }
+        return START_NOT_STICKY;
+    }
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
     	
@@ -199,7 +182,7 @@ public class UpdateService extends Service {
 			source = sources.get(0);
 		}
 		
-		InputStream inputStream = null;
+		InputStream inputStream;
 		
 		if( source.equals("src_bible_en") ) {
 			//
@@ -216,9 +199,8 @@ public class UpdateService extends Service {
 		} else {
 			String sdpath = Environment.getExternalStorageDirectory().getAbsolutePath();
 			try {
-				inputStream = new FileInputStream(sdpath + File.separator + wqPreference.DOTPATH + File.separator + source);
+				inputStream = new FileInputStream(sdpath + File.separator + SettingsActivity.DOTPATH + File.separator + source);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				inputStream = context.getResources().openRawResource(R.raw.src_bible_en);
 			}
 		}
