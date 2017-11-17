@@ -30,108 +30,12 @@ import android.os.IBinder;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.widget.RemoteViews;
 
 public class UpdateService extends Service {
 	
-	private static final String LOG = "com.devfruit.wq";
-	private static final String PREFS = "watermelonQuotes";	
-	
+	private static final String PREFS = "watermelonQuotes";
 	private static int[] mAllWidgetsIds;
-	
-	private static Typeface font = null;
-
-	private static int bg, fg;
-	
-	static public Bitmap renderQuote(float scale, float w, float h, String text) {
-
-	    Bitmap bitmap = Bitmap.createBitmap((int)w, (int)h, Bitmap.Config.ARGB_4444);
-	    Canvas canvas = new Canvas(bitmap);	    
-	    Paint paint = new Paint();
-	    
-	    int srcTextSize = (int)(11 * scale + 0.5f);
-	    int textSize = srcTextSize;
-
-	    // Setup default paint style
-	    paint.setAntiAlias(true);
-	    paint.setSubpixelText(true);
-	    paint.setStyle(Paint.Style.FILL);
-	    paint.setColor(fg);
-	    paint.setTextSize(textSize);
-	    paint.setTextAlign(Align.LEFT);
-
-	    // Split string into quote and source of quote
-	    String[] quoteAndSource = text.split("\\\\");
-	    String quote = text;
-	    String source = "";
-	    
-	    if( quoteAndSource.length >= 2 ) {
-	    	quote = "\"" + quoteAndSource[0].trim() + "\"";
-	    	source = " ~ " + quoteAndSource[quoteAndSource.length - 1];
-	    }
-	    
-	    // Two text paints, one for quote, second to source
-	    
-	    if( font != null ) {
-	    	paint.setTypeface(font);
-	    } else {
-	    	paint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD));
-	    }
-	    paint.setAlpha(250);
-	    int padding = (int)(10 * scale + 0.5f);
-	    StaticLayout layout = new StaticLayout(quote, new TextPaint(paint), (int)(w), Layout.Alignment.ALIGN_CENTER, 0.73f, -0.4f, false);
-	    
-
-	    // Update font size
-	    canvas.save();
-	    textSize = srcTextSize;
-	    while ( (layout.getHeight()) < h/2.2 ) {
-		    paint.setTextSize(textSize++);
-		    layout = new StaticLayout(quote, new TextPaint(paint), (int)(w), Layout.Alignment.ALIGN_CENTER, 0.73f, -0.4f, false);
-	    }
-
-	    paint.setTextSize(textSize - 2);	   	    
-	    layout = new StaticLayout(quote, new TextPaint(paint), (int)(w), Layout.Alignment.ALIGN_CENTER, 0.73f, -0.4f, false);
-	    
-	    float delta;
-	    
-	    if( w/h > 3 ) {
-	    	// slim
-	    	delta = 10;
-	    } else {
-	    	delta = 30;
-	    }
-	    
-	    float dy = (h - layout.getHeight()) / 2 - delta - 5;
-	    
-	    // Debug only:
-	    paint.setColor(bg);
-	    canvas.drawRect(0, 0, w, h, paint);
-	    
-	    paint.setColor(fg);
-	    paint.setAlpha(100);
-
-	    canvas.translate(0, dy); //position the text
-	    layout.draw(canvas);
-	    
-	    // Source
-	    canvas.restore();
-	    canvas.save();
-	    dy += layout.getHeight();
-	    paint.setTextSize(h/6);
-	    paint.setTypeface(Typeface.create(Typeface.SERIF, Typeface.ITALIC));
-	    paint.setAlpha(150);
-	    layout = new StaticLayout(source, new TextPaint(paint), (int)(w), Layout.Alignment.ALIGN_CENTER, 0.85f, -0.3f, false);
-	    float dx = w - paint.measureText(source) - padding;
-	    canvas.translate(0, h - h/3 + h/20);
-	    layout.draw(canvas);
-	    
-	    canvas.restore();
-	    canvas.drawLine(w/5, 4, w-w/5, 4, paint);
-	    canvas.drawLine(w/5, h-4, w-w/5, h-4, paint);
-	    
-	    return bitmap;
-
-    }
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
@@ -156,15 +60,18 @@ public class UpdateService extends Service {
         return START_NOT_STICKY;
     }
 
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
     	
-		CustomRemoteViews remoteViews = new CustomRemoteViews(context.getPackageName(), R.layout.widget_layout);
+		RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
 		
 		SharedPreferences settings = context.getSharedPreferences(PREFS, 0);
 		
-		bg = settings.getInt(appWidgetId + "_background", 0x80000000);
-		fg = settings.getInt(appWidgetId + "_foreground", 0xFFFFFFFF);
-		
+
 		int total = settings.getInt(appWidgetId + "_total_source_total", 0);
 		List<String> sources = new ArrayList<String>();
 		if( total > 0 ) {
@@ -231,9 +138,11 @@ public class UpdateService extends Service {
 		float s = context.getResources().getDisplayMetrics().density;			
 		float h = appWidgetManager.getAppWidgetInfo(appWidgetId).minHeight;
 		float w = appWidgetManager.getAppWidgetInfo(appWidgetId).minWidth;
-		
-		font = Typeface.createFromAsset(context.getAssets(), "fonts/OldStandard-Regular.otf");
-		remoteViews.setImageViewBitmap(R.id.update_bitmap, renderQuote(s, w, h, quote));
+
+        int bg = settings.getInt(appWidgetId + "_background", 0x80000000);
+        int fg = settings.getInt(appWidgetId + "_foreground", 0xFFFFFFFF);
+        Typeface font = Typeface.createFromAsset(context.getAssets(), "fonts/OldStandard-Regular.otf");
+		remoteViews.setImageViewBitmap(R.id.update_bitmap, Renderer.renderQuote(s, w, h, bg, fg, font, quote));
 		remoteViews.apply(context, null);
 		
 		Intent clickIntent = new Intent(context, UpdateService.class);
@@ -245,10 +154,4 @@ public class UpdateService extends Service {
 		appWidgetManager.updateAppWidget(appWidgetId, remoteViews);    	
     
     }
-
-	@Override
-	public IBinder onBind(Intent intent) {
-		return null;
-	}
-
 }
