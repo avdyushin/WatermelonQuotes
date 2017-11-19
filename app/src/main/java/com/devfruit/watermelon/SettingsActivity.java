@@ -15,7 +15,6 @@ import com.devfruit.watermelon.wqColorPickerDialog.OnColorChangedListener;
 
 import android.app.AlertDialog;
 import android.appwidget.AppWidgetManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -37,7 +36,6 @@ import android.view.View.OnClickListener;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceClickListener, OnColorChangedListener {
     
-	private static final String LOG = "com.devfruit.wq";
 	public static final String DOTPATH = "watermelon";
 	private static final String PREFS = "watermelonQuotes";
 	
@@ -102,9 +100,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			// Commit the edits!
     		editor.commit();
 			
-			final Context context = SettingsActivity.this;
-			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-			UpdateService.updateAppWidget(context, appWidgetManager, mAppWidgetId);
+			UpdateService.updateAppWidget(SettingsActivity.this, mAppWidgetId);
 
 			Intent resultValue = new Intent();
 			resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);

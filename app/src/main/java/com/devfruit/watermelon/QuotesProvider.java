@@ -15,17 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by avdyushin on 18/11/2017.
- */
+class QuotesProvider {
 
-public class QuotesProvider {
-
-    public String getNextQuote(Context context, int appWidgetId) {
+    String getNextQuote(Context context, int appWidgetId) {
         SharedPreferences settings = UserSettings.shared(context);
 
         int total = settings.getInt(appWidgetId + "_total_source_total", 0);
-        List<String> sources = new ArrayList<String>();
+        List<String> sources = new ArrayList<>();
         if( total > 0 ) {
             for( int i = total - 1; i >= 0; --i ) {
                 String s = settings.getString(appWidgetId + "_use_source_" + i, "");
@@ -42,32 +38,33 @@ public class QuotesProvider {
         }
 
         InputStream inputStream;
-
-        if( source.equals("src_bible_en") ) {
-            //
-            inputStream = context.getResources().openRawResource(R.raw.src_bible_en);
-        } else if ( source.equals("src_bible_ru") ) {
-            //
-            inputStream = context.getResources().openRawResource(R.raw.src_bible_ru);
-        } else if ( source.equals("src_bible_cn") ) {
-            //
-            inputStream = context.getResources().openRawResource(R.raw.src_bible_cn);
-        } else if ( source.equals("src_classics_biter") ) {
-            //
-            inputStream = context.getResources().openRawResource(R.raw.src_classics_biter);
-        } else {
-            String sdpath = Environment.getExternalStorageDirectory().getAbsolutePath();
-            try {
-                inputStream = new FileInputStream(sdpath + File.separator + SettingsActivity.DOTPATH + File.separator + source);
-            } catch (FileNotFoundException e) {
+        switch (source) {
+            case "src_bible_en":
                 inputStream = context.getResources().openRawResource(R.raw.src_bible_en);
-            }
+                break;
+            case "src_bible_ru":
+                inputStream = context.getResources().openRawResource(R.raw.src_bible_ru);
+                break;
+            case "src_bible_cn":
+                inputStream = context.getResources().openRawResource(R.raw.src_bible_cn);
+                break;
+            case "src_classics_biter":
+                inputStream = context.getResources().openRawResource(R.raw.src_classics_biter);
+                break;
+            default:
+                String sdpath = Environment.getExternalStorageDirectory().getAbsolutePath();
+                try {
+                    inputStream = new FileInputStream(sdpath + File.separator + SettingsActivity.DOTPATH + File.separator + source);
+                } catch (FileNotFoundException e) {
+                    inputStream = context.getResources().openRawResource(R.raw.src_bible_en);
+                }
+                break;
         }
 
         InputStreamReader inputreader = new InputStreamReader(inputStream);
         BufferedReader buffreader = new BufferedReader(inputreader);
         String line;
-        List<String> array = new ArrayList<String>();
+        List<String> array = new ArrayList<>();
         int skipper = 0;
         try {
             while( (line = buffreader.readLine()) != null ) {
@@ -78,14 +75,11 @@ public class QuotesProvider {
                 }
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            //e.printStackTrace();
+            e.printStackTrace();
         }
 
         // Create some random data
         int number = (new Random().nextInt(array.size()));
-
-        String quote = array.get(number);
-        return quote;
+        return array.get(number);
     }
 }
