@@ -11,10 +11,11 @@ import android.util.Log;
 
 public class WidgetProvider extends AppWidgetProvider {
 
-    private BroadcastReceiver receiver;
+    private static BroadcastReceiver receiver;
 
     private void register(Context context, String action) {
         if (receiver == null) {
+            Log.d("WQ", "Will register to " + action);
             receiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {

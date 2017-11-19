@@ -11,6 +11,7 @@ import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
@@ -34,8 +35,10 @@ public class UpdateService extends Service {
         );
         if (widgetID == AppWidgetManager.INVALID_APPWIDGET_ID) {
             // If not, update all widgets
+            Log.d("WQ", "Update ALL");
             updateAll(manager);
         } else {
+            Log.d("WQ", "Update only ONE");
             updateAppWidget(this.getApplicationContext(), manager, widgetID);
         }
         return START_NOT_STICKY;
@@ -76,21 +79,22 @@ public class UpdateService extends Service {
 
         Display display = ((WindowManager)context.getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
         int orientation = display.getRotation();
-
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        Log.d("WQ", "w = " + metrics.widthPixels + " h = " + metrics.heightPixels);
 //        w = minWidth;
 //        h = maxHeight;
 
         // TODO: Check for tablet and phone
-        if (orientation == Surface.ROTATION_0 || orientation == Surface.ROTATION_180) {
+        if (metrics.widthPixels > metrics.heightPixels) {
             // Landscape: maxWidth, minHeight
-            Log.d("WQ","LANDSCAPE");
+//            Log.d("WQ","LANDSCAPE");
             if (maxWidth > 0 && minHeight > 0) {
                 w = maxWidth;
                 h = minHeight;
             }
         } else {
             // Portrait: minWidth, maxHeight
-            Log.d("WQ","PORTRAIT");
+//            Log.d("WQ","PORTRAIT");
             if (minWidth > 0 && maxHeight > 0) {
                 w = minWidth;
                 h = maxHeight;
