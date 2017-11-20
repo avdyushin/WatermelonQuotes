@@ -16,6 +16,7 @@
     <string name="put_quotes">Помести ваши цитаты сюда: %1$s</string>
     <string name="no_external_storage">Внешняя карта памяти не найдена</string>
     <string name="requires_external">Для этой опции требуется внешняя память</string>
+    <string name="select_quotes_title">Выберите источник цитат</string>
     <string name="select_quotes">Выберите хотя бы один источник цитат</string>
     <string name="installed_quotes">Установлены цитаты</string>
     <string name="found_quotes">Найдено цитат: %1$d</string>

@@ -26,84 +26,22 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceClickListener {
-    
+
+    private static final String TAG = "Quotes";
     public static final String DOTPATH = "watermelon";
     private static final String PREFS = "watermelonQuotes";
     
-    int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+    private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+
     List<String> sources;
-    
-    
+
     private int backgroundColor = 0x80000000;
     private int foregroundColor = 0xEEFFFFFF;
-    
-    
-    private void cancel() {
-        
-        Intent i = new Intent();
-        
-        i.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
-        setResult(RESULT_CANCELED, i);
-        
-        finish();
-        
-    }
-    
-    private void save() {
-        
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences settings = getSharedPreferences(PREFS, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        
-        boolean b, e = false;
-        int i = 0;
-        
-        for (String key: sources) {
-            b = sharedPrefs.getBoolean(key, false);
-            if( b ) {
-                String config_key = mAppWidgetId + "_use_source_" + i;
-                editor.putString(config_key, key);
-                ++i;
-            }
-            e |= b;
-        }       
-        editor.putInt(mAppWidgetId + "_total_source_total", i);
-
-        // None selected
-        if( !e ) {
-            AlertDialog ad = new AlertDialog.Builder(this).create();
-            ad.setCancelable(false); // This blocks the 'BACK' button
-            ad.setMessage(getString(R.string.select_quotes));
-            ad.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();                    
-                }
-            });
-            ad.show();
-        } else {
-            // We need an Editor object to make preference changes.
-            // All objects are from android.context.Context
-
-            editor.putInt(mAppWidgetId + "_background", backgroundColor);
-            editor.putInt(mAppWidgetId + "_foreground", foregroundColor);
-            
-            // Commit the edits!
-            editor.apply();
-            
-            UpdateService.updateAppWidget(SettingsActivity.this, mAppWidgetId);
-
-            Intent resultValue = new Intent();
-            resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
-            setResult(RESULT_OK, resultValue);
-            finish();
-
-        }
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -188,7 +126,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         ((ColorPickerPreference)findPreference("foreground")).setSummary(getString(R.string.pref_foreground_sum, ColorPickerPreference.convertToARGB(foregroundColor)));
 
         // Preinstalled
-        sources = new ArrayList<String>();
+        sources = new ArrayList<>();
 
         sources.add("src_bible_en");
         sources.add("src_bible_ru");
@@ -299,22 +237,22 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {
-            mAppWidgetId = extras.getInt(
+            appWidgetId = extras.getInt(
                     AppWidgetManager.EXTRA_APPWIDGET_ID, 
                     AppWidgetManager.INVALID_APPWIDGET_ID
             );
         }
       
         // If they gave us an intent without the widget id, just bail.
-        if (mAppWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
-            finish();
+        if (appWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
+            cancel();
         }
     }
     
     @Override
     public void onBackPressed() {
-        cancel();
         super.onBackPressed();
+        cancel();
     }
 
     @Override
@@ -322,4 +260,72 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         return false;
     }
 
+    private void save() {
+
+        if (appWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
+            Log.d(TAG, "Invalid widget id!");
+            cancel();
+        }
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences settings = getSharedPreferences(PREFS, 0);
+        SharedPreferences.Editor editor = settings.edit();
+
+        boolean b, e = false;
+        int i = 0;
+
+        for (String key: sources) {
+            b = sharedPrefs.getBoolean(key, false);
+            if( b ) {
+                String config_key = appWidgetId + "_use_source_" + i;
+                editor.putString(config_key, key);
+                ++i;
+            }
+            e |= b;
+        }
+        editor.putInt(appWidgetId + "_total_source_total", i);
+
+        // None selected
+        if( !e ) {
+            showWarning();
+        } else {
+            // We need an Editor object to make preference changes.
+            // All objects are from android.context.Context
+
+            editor.putInt(appWidgetId + "_background", backgroundColor);
+            editor.putInt(appWidgetId + "_foreground", foregroundColor);
+
+            // Commit the edits!
+            editor.apply();
+
+            UpdateService.updateAppWidget(SettingsActivity.this, appWidgetId);
+
+            Intent resultValue = new Intent();
+            resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+            setResult(RESULT_OK, resultValue);
+            finish();
+
+        }
+    }
+
+    private void cancel() {
+        Intent i = new Intent();
+        i.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        setResult(RESULT_CANCELED, i);
+        finish();
+    }
+
+    private void showWarning() {
+        AlertDialog ad = new AlertDialog.Builder(this).create();
+        ad.setCancelable(false); // This blocks the 'BACK' button
+        ad.setTitle(getString(R.string.select_quotes_title));
+        ad.setMessage(getString(R.string.select_quotes));
+        ad.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        ad.show();
+    }
 }

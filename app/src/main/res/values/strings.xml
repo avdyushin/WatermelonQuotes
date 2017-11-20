@@ -16,6 +16,7 @@
     <string name="put_quotes">Put your quotes into %1$s</string>
     <string name="no_external_storage">No external storage found</string>
     <string name="requires_external">This option requires external storage</string>
+    <string name="select_quotes_title">Please select source</string>
     <string name="select_quotes">Please select at least one quotes source</string>
     <string name="installed_quotes">Installed demo quotes</string>
     <string name="found_quotes">Found %1$d quote(s)</string>
