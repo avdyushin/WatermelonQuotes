@@ -22,13 +22,15 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="@android:string/cancel"/>
+            android:text="@android:string/cancel"
+            style="?android:attr/buttonBarButtonStyle"/>
 
         <Button android:id="@+id/okButton"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="@android:string/ok"/>
+            android:text="@android:string/ok"
+            style="?android:attr/buttonBarButtonStyle"/>
 
     </LinearLayout>
 
