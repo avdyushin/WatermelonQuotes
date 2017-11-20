@@ -7,6 +7,4 @@
     android:initialLayout="@layout/widget_layout" 
     android:previewImage="@drawable/widget_preview"
     android:updatePeriodMillis="300000"
-    android:configure="com.devfruit.watermelon.SettingsActivity"
-    android:widgetCategory="home_screen|keyguard">
-</appwidget-provider>
+    android:configure="com.devfruit.watermelon.SettingsActivity"/>
