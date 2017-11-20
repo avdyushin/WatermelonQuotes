@@ -1,10 +1,13 @@
 # Watermelon Quotes
 <a target="_blank" href="LICENSE"><img src="http://img.shields.io/:license-apache-blue.svg" alt="License" /></a>
+<a target="_blank" href="https://travis-ci.org/avdyushin/WatermelonQuotes">
+    <img src="https://travis-ci.org/avdyushin/WatermelonQuotes.svg?branch=master" alt="Build Status" />
+</a>
 
 Widget for Android which displays your citations on home screen.
 
 <a target="_blank" href="https://play.google.com/store/apps/details?id=com.devfruit.watermelon&hl=en">
-<img src="images/google-play-badge.png" width="240"/>
+    <img src="images/google-play-badge.png" width="240"/>
 </a>
 
 # Screenshots
