@@ -58,7 +58,6 @@
             android:key="foreground"
             android:title="@string/pref_foreground"
             android:summary="@string/pref_foreground_sum"
-            alphaSlider="true"
             android:defaultValue="#EEFFFFFF"
         />
 
@@ -66,7 +65,6 @@
             android:key="background"
             android:title="@string/pref_background"
             android:summary="@string/pref_background_sum"
-            alphaSlider="true"
             android:defaultValue="#80000000"
             />
 

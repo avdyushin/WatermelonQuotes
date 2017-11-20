@@ -11,8 +11,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.devfruit.watermelon.wqColorPickerDialog.OnColorChangedListener;
-
 import android.app.AlertDialog;
 import android.appwidget.AppWidgetManager;
 import android.content.DialogInterface;
@@ -28,13 +26,10 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.BackgroundColorSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class SettingsActivity extends PreferenceActivity implements OnPreferenceClickListener, OnColorChangedListener {
+public class SettingsActivity extends PreferenceActivity implements OnPreferenceClickListener {
     
     public static final String DOTPATH = "watermelon";
     private static final String PREFS = "watermelonQuotes";
@@ -83,7 +78,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             AlertDialog ad = new AlertDialog.Builder(this).create();
             ad.setCancelable(false); // This blocks the 'BACK' button
             ad.setMessage(getString(R.string.select_quotes));
-            ad.setButton("OK", new DialogInterface.OnClickListener() {
+            ad.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();                    
@@ -109,20 +104,20 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
         }
     }
-    
-    
-   private void updateSettings() {
 
-   }
-    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         
         setResult(RESULT_CANCELED);
         
-        super.onCreate(savedInstanceState);        
+        super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
-        
+
+//        getFragmentManager()
+//                .beginTransaction()
+//                .replace(android.R.id.content, new SettingsFragment())
+//                .commit();
+
         setContentView(R.layout.prefs_layout);
         
         
@@ -148,7 +143,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
         SharedPreferences settings = getSharedPreferences(PREFS, 0);
         final SharedPreferences.Editor editor = settings.edit();
-        
+
         ((ColorPickerPreference)findPreference("background")).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
             //@Override
@@ -318,35 +313,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     
     @Override
     public void onBackPressed() {
-
         cancel();
         super.onBackPressed();
-        
     }
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        // TODO Auto-generated method stub
         return false;
-    }
-
-    @Override
-    public void colorChanged(int color, String key) {
-        // TODO Auto-generated method stub
-        SharedPreferences settings = getSharedPreferences(PREFS, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        
-        editor.putInt(mAppWidgetId + "_" + key, color);
-        editor.putInt("last_" + key, color);
-        
-        editor.apply();
-        
-        String hexColor = String.format("#%08X", color);
-        PreferenceScreen screen = (PreferenceScreen)findPreference(key);
-
-        Spannable summary = new SpannableString ( "Color is " + hexColor + "          ");
-        summary.setSpan( new BackgroundColorSpan( (0xFF000000 + (color & 0xFFFFFF)) ), 20, summary.length(), 0 );
-        screen.setSummary( summary );
     }
 
 }
