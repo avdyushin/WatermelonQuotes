@@ -226,7 +226,7 @@ public class ColorPickerPreference
     		argb = argb.replace("#", "");
     	}
 
-        int alpha = -1, red = -1, green = -1, blue = -1;
+        int alpha = 255, red = 255, green = 255, blue = 255;
 
         if (argb.length() == 8) {
             alpha = Integer.parseInt(argb.substring(0, 2), 16);

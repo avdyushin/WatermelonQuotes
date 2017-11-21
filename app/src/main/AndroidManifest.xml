@@ -19,8 +19,14 @@
             </intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_info" />
         </receiver>
+
         <service android:name=".UpdateService" />
-        <activity android:name=".SettingsActivity" android:label="@string/settings">
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings"
+            android:exported="false">
+
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
