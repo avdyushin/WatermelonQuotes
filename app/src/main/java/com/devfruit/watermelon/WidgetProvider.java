@@ -49,7 +49,7 @@ public class WidgetProvider extends AppWidgetProvider {
     public void onEnabled(Context context) {
         super.onEnabled(context);
         Log.d("WQ", "New enabled");
-        start(context);
+//        start(context);
     }
 
     @Override

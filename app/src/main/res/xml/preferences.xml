@@ -53,13 +53,11 @@
         <com.jaredrummler.android.colorpicker.ColorPreference
             android:key="foreground"
             android:title="@string/pref_foreground"
-            android:summary="@string/pref_foreground_sum"
             android:defaultValue="0xEEFFFFFF"/>
 
         <com.jaredrummler.android.colorpicker.ColorPreference
             android:key="background"
             android:title="@string/pref_background"
-            android:summary="@string/pref_background_sum"
             android:defaultValue="0x80000000"/>
 
     </PreferenceCategory>

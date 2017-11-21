@@ -5,6 +5,7 @@ import android.preference.PreferenceFragment;
 import android.support.annotation.Nullable;
 
 public class SettingsFragment extends PreferenceFragment {
+    static final String TAG = "QuotesFragment";
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
