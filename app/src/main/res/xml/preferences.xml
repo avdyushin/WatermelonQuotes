@@ -12,29 +12,25 @@
             android:key="src_bible_en"
             android:title="@string/en_bible"
             android:summary="@string/en_bible_sum"
-            android:defaultValue="true"
-        />
+            android:defaultValue="true"/>
 
         <CheckBoxPreference
             android:key="src_bible_ru"
             android:title="@string/ru_bible"
             android:summary="@string/ru_bible_sum"
-            android:defaultValue="false"
-        />
+            android:defaultValue="false"/>
 
         <CheckBoxPreference
             android:key="src_bible_cn"
             android:title="@string/cn_bible"
             android:summary="@string/cn_bible_sum"
-            android:defaultValue="false"
-        />
+            android:defaultValue="false"/>
 
         <CheckBoxPreference
             android:key="src_classics_biter"
             android:title="@string/biter_classic"
             android:summary="@string/biter_classic_sum"
-            android:defaultValue="false"
-            />
+            android:defaultValue="false"/>
 
     </PreferenceCategory>
 
@@ -54,19 +50,17 @@
         android:title="@string/appearance"
         android:key="Appearance_category">
 
-        <com.devfruit.watermelon.ColorPickerPreference
+        <com.jaredrummler.android.colorpicker.ColorPreference
             android:key="foreground"
             android:title="@string/pref_foreground"
             android:summary="@string/pref_foreground_sum"
-            android:defaultValue="#EEFFFFFF"
-        />
+            android:defaultValue="0xEEFFFFFF"/>
 
-        <com.devfruit.watermelon.ColorPickerPreference
+        <com.jaredrummler.android.colorpicker.ColorPreference
             android:key="background"
             android:title="@string/pref_background"
             android:summary="@string/pref_background_sum"
-            android:defaultValue="#80000000"
-            />
+            android:defaultValue="0x80000000"/>
 
     </PreferenceCategory>
 </PreferenceScreen>

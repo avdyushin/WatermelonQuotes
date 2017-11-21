@@ -82,48 +82,48 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         SharedPreferences settings = getSharedPreferences(PREFS, 0);
         final SharedPreferences.Editor editor = settings.edit();
 
-        ((ColorPickerPreference)findPreference("background")).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-            //@Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                backgroundColor = Integer.valueOf(String.valueOf(newValue));
-                preference.setSummary(
-                        getString(
-                                R.string.pref_background_sum, 
-                                ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)))
-                                )
-                );
-                editor.putInt("background", backgroundColor);
-                editor.apply();
-                return true;
-            }
-
-        });
-        
-        ((ColorPickerPreference)findPreference("foreground")).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-            //@Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                foregroundColor = Integer.valueOf(String.valueOf(newValue));
-                preference.setSummary(
-                        getString(
-                                R.string.pref_foreground_sum, 
-                                ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)))
-                                )
-                );
-                editor.putInt("foreground", foregroundColor);
-                editor.commit();
-                return true;
-            }
-
-        }); 
+//        ((ColorPickerPreference)findPreference("background")).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+//
+//            //@Override
+//            public boolean onPreferenceChange(Preference preference, Object newValue) {
+//                backgroundColor = Integer.valueOf(String.valueOf(newValue));
+//                preference.setSummary(
+//                        getString(
+//                                R.string.pref_background_sum,
+//                                ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)))
+//                                )
+//                );
+//                editor.putInt("background", backgroundColor);
+//                editor.apply();
+//                return true;
+//            }
+//
+//        });
+//
+//        ((ColorPickerPreference)findPreference("foreground")).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+//
+//            //@Override
+//            public boolean onPreferenceChange(Preference preference, Object newValue) {
+//                foregroundColor = Integer.valueOf(String.valueOf(newValue));
+//                preference.setSummary(
+//                        getString(
+//                                R.string.pref_foreground_sum,
+//                                ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)))
+//                                )
+//                );
+//                editor.putInt("foreground", foregroundColor);
+//                editor.commit();
+//                return true;
+//            }
+//
+//        });
         
         
         backgroundColor         = settings.getInt("background", 0x80000000);
         foregroundColor         = settings.getInt("foreground", 0xEEFFFFFF);
         
-        ((ColorPickerPreference)findPreference("background")).setSummary(getString(R.string.pref_background_sum, ColorPickerPreference.convertToARGB(backgroundColor)));
-        ((ColorPickerPreference)findPreference("foreground")).setSummary(getString(R.string.pref_foreground_sum, ColorPickerPreference.convertToARGB(foregroundColor)));
+//        ((ColorPickerPreference)findPreference("background")).setSummary(getString(R.string.pref_background_sum, ColorPickerPreference.convertToARGB(backgroundColor)));
+//        ((ColorPickerPreference)findPreference("foreground")).setSummary(getString(R.string.pref_foreground_sum, ColorPickerPreference.convertToARGB(foregroundColor)));
 
         // Preinstalled
         sources = new ArrayList<>();
