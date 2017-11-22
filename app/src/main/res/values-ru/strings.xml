@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="biter_names">
+        <item>Классика</item>
+        <item>Определения</item>
+        <item>Английский</item>
+        <item>Фоменко</item>
+        <item>Омар Хаям</item>
+        <item>Ежи Лец</item>
+        <item>Любовь</item>
+        <item>Великие математики</item>
+        <item>Законы Мерфи</item>
+        <item>Мотивация</item>
+        <item>Поговорки</item>
+        <item>Пословицы</item>
+        <item>Козьма Прутков</item>
+        <item>Сенека</item>
+    </string-array>
+
     <string name="app_name">Цитаты Watermelon</string>
 
     <string name="widget_name">Watermelon</string>
@@ -39,7 +56,7 @@
     <string name="cn_bible">Китайская Библия</string>
     <string name="cn_bible_sum">Цитаты из Библии CNV</string>
 
-    <string name="biter_classic">Классика</string>
-    <string name="biter_classic_sum">Цитаты классиков</string>
+    <string name="ru_biter">Цитаты от Байтера</string>
+    <string name="ru_biter_sum">Русскоязычные цитаты из разных источников</string>
 
 </resources>

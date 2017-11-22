@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="biter_names">
+        <item>Classics</item>
+        <item>Definitions</item>
+        <item>English</item>
+        <item>Fomenko</item>
+        <item>Omar Hayam</item>
+        <item>Ezhi Lec</item>
+        <item>Love</item>
+        <item>Great mathematics</item>
+        <item>Merphi</item>
+        <item>Motivation</item>
+        <item>Proverbs</item>
+        <item>Sayings</item>
+        <item>Prutkov</item>
+        <item>Seneka</item>
+    </string-array>
+
+    <string-array name="empty_array"/>
+
     <string name="app_name">Watermelon Quotes</string>
 
     <string name="widget_name">Watermelon</string>
@@ -39,7 +58,7 @@
     <string name="cn_bible">Chinese Bible</string>
     <string name="cn_bible_sum">Quotes from CNV Chinese Bible</string>
 
-    <string name="biter_classic">Classics</string>
-    <string name="biter_classic_sum">Classics quotes</string>
+    <string name="ru_biter">Russian by Biter</string>
+    <string name="ru_biter_sum">Different types of quotes in Russian</string>
 
 </resources>

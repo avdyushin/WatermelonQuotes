@@ -6,7 +6,7 @@
 
     <PreferenceCategory
         android:title="@string/preinstalled"
-        android:key="buildin_category">
+        android:key="build_in_category">
 
         <CheckBoxPreference
             android:key="src_bible_en"
@@ -26,11 +26,20 @@
             android:summary="@string/cn_bible_sum"
             android:defaultValue="false"/>
 
-        <CheckBoxPreference
-            android:key="src_classics_biter"
-            android:title="@string/biter_classic"
-            android:summary="@string/biter_classic_sum"
-            android:defaultValue="false"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/ru_biter"
+        android:summary="@string/ru_biter_sum"
+        android:key="biter_quotes">
+
+        <MultiSelectListPreference
+            android:key="biter_quotes_key"
+            android:dialogTitle="@string/ru_biter"
+            android:title="@string/ru_biter_sum"
+            android:entries="@array/biter_names"
+            android:entryValues="@array/biter_values"
+            android:defaultValue="@array/empty_array"/>
 
     </PreferenceCategory>
 
