@@ -19,7 +19,7 @@ import android.view.View;
 public class SettingsActivity extends PreferenceActivity {
 
     private static final String TAG = "Quotes";
-    public static final String DOTPATH = "watermelon";
+//    public static final String DOTPATH = "watermelon";
 
     private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 

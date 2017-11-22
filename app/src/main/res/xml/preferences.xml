@@ -5,8 +5,8 @@
     android:key="screen_main">
 
     <PreferenceCategory
-        android:title="@string/preinstalled"
-        android:key="build_in_category">
+        android:key="build_in_category"
+        android:title="@string/preinstalled">
 
         <CheckBoxPreference
             android:key="src_bible_en"
@@ -29,9 +29,9 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="biter_quotes"
         android:title="@string/ru_biter"
-        android:summary="@string/ru_biter_sum"
-        android:key="biter_quotes">
+        android:summary="@string/ru_biter_sum">
 
         <MultiSelectListPreference
             android:key="biter_quotes_key"
@@ -44,14 +44,16 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/external_storage"
-        android:key="external_category">
+        android:key="external_category"
+        android:title="@string/external_storage">
 
-        <PreferenceScreen
-                android:title="@string/no_quotes_installed"
-                android:summary=""
-                android:key="external_help">
-        </PreferenceScreen>
+        <MultiSelectListPreference
+            android:key="external_sources"
+            android:title="@string/no_quotes_installed"
+            android:summary=""
+            android:entries="@array/empty_array"
+            android:entryValues="@array/empty_array"
+            android:defaultValue="@array/empty_array"/>
 
     </PreferenceCategory>
 

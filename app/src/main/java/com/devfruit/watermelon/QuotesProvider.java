@@ -42,10 +42,8 @@ class QuotesProvider {
         if (resourceId != 0) {
             inputStream = context.getResources().openRawResource(resourceId);
         } else {
-            String sd_path = Environment.getExternalStorageDirectory().getAbsolutePath();
-            String file_path = sd_path + File.separator + SettingsActivity.DOTPATH + File.separator + source;
             try {
-                inputStream = new FileInputStream(file_path);
+                inputStream = new FileInputStream(FilesProvider.filePathForSource(source));
             } catch (FileNotFoundException e) {
                 inputStream = context.getResources().openRawResource(R.raw.src_bible_en);
             }
