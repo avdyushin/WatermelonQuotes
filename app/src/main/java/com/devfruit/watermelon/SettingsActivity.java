@@ -1,7 +1,9 @@
 package com.devfruit.watermelon;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import android.app.AlertDialog;
 import android.appwidget.AppWidgetManager;
@@ -18,11 +20,8 @@ public class SettingsActivity extends PreferenceActivity {
 
     private static final String TAG = "Quotes";
     public static final String DOTPATH = "watermelon";
-    private static final String PREFS = "watermelonQuotes";
-    
-    private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
-    List<String> sources;
+    private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,14 +47,6 @@ public class SettingsActivity extends PreferenceActivity {
 //        PreferenceCategory externalCategory = (PreferenceCategory)findPreference("external_category");
 //        PreferenceScreen exthelp = (PreferenceScreen)findPreference("external_help");
 
-        // Preinstalled
-        sources = new ArrayList<>();
-
-        sources.add("src_bible_en");
-        sources.add("src_bible_ru");
-        sources.add("src_bible_cn");
-
-        sources.add("src_classics_biter");
 
 //        String state = Environment.getExternalStorageState();
 //
@@ -185,48 +176,48 @@ public class SettingsActivity extends PreferenceActivity {
             cancel();
         }
 
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences settings = getSharedPreferences(PREFS, 0);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences settings = UserSettings.shared(this);
         SharedPreferences.Editor editor = settings.edit();
 
-        int backgroundColor = sharedPrefs.getInt("background", 0x80000000);
-        int foregroundColor = sharedPrefs.getInt("foreground", 0xEEFFFFFF);
+        int backgroundColor = preferences.getInt("background", 0x80000000);
+        int foregroundColor = preferences.getInt("foreground", 0xEEFFFFFF);
 
-        Log.d(TAG,"BG = " + backgroundColor + " FG = " + foregroundColor);
+        List<String> buildInSources = Arrays.asList("src_bible_en", "src_bible_ru", "src_bible_cn");
+        List<String> biterSource = Arrays.asList(getResources().getStringArray(R.array.biter_values));
+        List<String> allSources = new ArrayList<>();
+        allSources.addAll(buildInSources);
+        allSources.addAll(biterSource);
 
-        boolean b, e = false;
+        Set<String> selected = preferences.getStringSet("biter_quotes_key", null);
+
+        Log.d(TAG,"All sources: " + allSources.toString());
+
+        boolean hasSources = false;
         int i = 0;
-
-        for (String key: sources) {
-            b = sharedPrefs.getBoolean(key, false);
-            if( b ) {
-                String config_key = appWidgetId + "_use_source_" + i;
+        for (String key: allSources) {
+            if(preferences.getBoolean(key, false) || selected.contains(key)) {
+                String config_key = appWidgetId + "_use_source_" + (i++);
                 editor.putString(config_key, key);
-                ++i;
+                hasSources = true;
             }
-            e |= b;
         }
         editor.putInt(appWidgetId + "_total_source_total", i);
+        editor.putInt(appWidgetId + "_background", backgroundColor);
+        editor.putInt(appWidgetId + "_foreground", foregroundColor);
+        editor.apply();
 
-        // None selected
-        if (e == false) {
-            showWarning();
-        } else {
-            // We need an Editor object to make preference changes.
-            // All objects are from android.context.Context
+        Log.d(TAG,"Selected sources count: " + i);
 
-            editor.putInt(appWidgetId + "_background", backgroundColor);
-            editor.putInt(appWidgetId + "_foreground", foregroundColor);
-
-            // Commit the edits!
-            editor.apply();
-
+        if (hasSources) {
             UpdateService.updateAppWidget(SettingsActivity.this, appWidgetId);
 
             Intent resultValue = new Intent();
             resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             setResult(RESULT_OK, resultValue);
             finish();
+        } else {
+            showWarning();
         }
     }
 

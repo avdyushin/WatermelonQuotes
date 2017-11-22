@@ -28,8 +28,8 @@ class QuotesProvider {
                 sources.add(s);
             }
         }
-        String source = "src_bible_en";
 
+        String source = "src_bible_en";
         if( sources.size() > 1 ) {
             int r = (new Random().nextInt(sources.size()));
             source = sources.get(r);
@@ -38,36 +38,26 @@ class QuotesProvider {
         }
 
         InputStream inputStream;
-        switch (source) {
-            case "src_bible_en":
+        int resourceId = context.getResources().getIdentifier(source, "raw", context.getPackageName());
+        if (resourceId != 0) {
+            inputStream = context.getResources().openRawResource(resourceId);
+        } else {
+            String sd_path = Environment.getExternalStorageDirectory().getAbsolutePath();
+            String file_path = sd_path + File.separator + SettingsActivity.DOTPATH + File.separator + source;
+            try {
+                inputStream = new FileInputStream(file_path);
+            } catch (FileNotFoundException e) {
                 inputStream = context.getResources().openRawResource(R.raw.src_bible_en);
-                break;
-            case "src_bible_ru":
-                inputStream = context.getResources().openRawResource(R.raw.src_bible_ru);
-                break;
-            case "src_bible_cn":
-                inputStream = context.getResources().openRawResource(R.raw.src_bible_cn);
-                break;
-            case "src_classics_biter":
-                inputStream = context.getResources().openRawResource(R.raw.src_classics_biter);
-                break;
-            default:
-                String sdpath = Environment.getExternalStorageDirectory().getAbsolutePath();
-                try {
-                    inputStream = new FileInputStream(sdpath + File.separator + SettingsActivity.DOTPATH + File.separator + source);
-                } catch (FileNotFoundException e) {
-                    inputStream = context.getResources().openRawResource(R.raw.src_bible_en);
-                }
-                break;
+            }
         }
 
-        InputStreamReader inputreader = new InputStreamReader(inputStream);
-        BufferedReader buffreader = new BufferedReader(inputreader);
+        InputStreamReader input_reader = new InputStreamReader(inputStream);
+        BufferedReader buffered_reader = new BufferedReader(input_reader);
         String line;
         List<String> array = new ArrayList<>();
         int skipper = 0;
         try {
-            while( (line = buffreader.readLine()) != null ) {
+            while( (line = buffered_reader.readLine()) != null ) {
                 if( skipper++ > 1 ) {
                     if( !line.trim().equals("") ) {
                         array.add(line);
