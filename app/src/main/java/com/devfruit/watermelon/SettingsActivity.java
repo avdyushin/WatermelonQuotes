@@ -80,9 +80,11 @@ public class SettingsActivity extends PreferenceActivity {
 
         List<String> buildInSources = Arrays.asList("src_bible_en", "src_bible_ru", "src_bible_cn");
         List<String> biterSource = Arrays.asList(getResources().getStringArray(R.array.biter_values));
+        List<String> externalSource = ExternalSourceProvider.allKeys();
         List<String> allSources = new ArrayList<>();
         allSources.addAll(buildInSources);
         allSources.addAll(biterSource);
+        allSources.addAll(externalSource);
 
         Set<String> selected = preferences.getStringSet("biter_quotes_key", null);
 

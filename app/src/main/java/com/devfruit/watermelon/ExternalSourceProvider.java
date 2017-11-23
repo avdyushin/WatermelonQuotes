@@ -11,9 +11,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 class QuoteSource {
+    String key;
     String title;
     String description;
-    QuoteSource(String title, String description) {
+    QuoteSource(String key, String title, String description) {
+        this.key = key;
         this.title = title;
         this.description = description;
     }
@@ -43,7 +45,7 @@ class ExternalSourceProvider {
                             String title = bf.readLine();
                             String description = bf.readLine();
                             if (!title.trim().isEmpty() && !description.trim().isEmpty()) {
-                                available.add(new QuoteSource(title, description));
+                                available.add(new QuoteSource(f.getName(), title, description));
                             }
                         } catch (FileNotFoundException e) {
                             Log.w(TAG, "Can't find file: " + e);
@@ -55,5 +57,14 @@ class ExternalSourceProvider {
             }
         }
         return available;
+    }
+
+    static ArrayList<String> allKeys() {
+        ArrayList<QuoteSource> installed = userInstalledQuotes();
+        ArrayList<String> result = new ArrayList<>();
+        for (QuoteSource source: installed) {
+            result.add(source.key);
+        }
+        return result;
     }
 }

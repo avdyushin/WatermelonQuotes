@@ -38,8 +38,9 @@
     <string name="not_found">No quotes found</string>
 
     <plurals name="found_quotes">
-        <item quantity="one">Found %1$d quote</item>
-        <item quantity="many">Found %1$d quotes</item>
+        <item quantity="one">Found %d quote</item>
+        <item quantity="many">Found %d quotes</item>
+        <item quantity="other">Found %d quotes</item>
     </plurals>
 
     <string name="pref_background">Background color</string>

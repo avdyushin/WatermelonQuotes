@@ -5,8 +5,10 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.CheckBoxPreference;
 import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
@@ -76,7 +78,7 @@ public class SettingsFragment extends PreferenceFragment {
     final static int REQUEST = 1;
 
     private void updateExternalSources(boolean hasStorage, boolean granted) {
-        PreferenceScreen external_sources = (PreferenceScreen) findPreference("external_sources");
+        PreferenceScreen external_sources = (PreferenceScreen)findPreference("external_sources");
         Log.d(TAG, "Updated " + external_sources.toString());
         Log.d(TAG, "Params with " + hasStorage + ", " + granted);
         if (hasStorage) {
@@ -86,9 +88,10 @@ public class SettingsFragment extends PreferenceFragment {
                 if (total == 0 ) {
                     external_sources.setTitle(R.string.not_found);
                 } else {
-                    external_sources.setTitle(getResources().getQuantityString(R.plurals.found_quotes, total));
+                    external_sources.setTitle(getResources().getQuantityString(R.plurals.found_quotes, total, total));
                 }
                 external_sources.setSummary(getString(R.string.put_quotes, ExternalSourceProvider.QUOTES_PATH));
+                createCheckBoxes(installed);
             } else {
                 external_sources.setTitle(R.string.no_permissions);
                 external_sources.setSummary(R.string.requires_external);
@@ -96,6 +99,18 @@ public class SettingsFragment extends PreferenceFragment {
         } else {
             external_sources.setTitle(R.string.no_external_storage);
             external_sources.setSummary(R.string.requires_external);
+        }
+    }
+
+    private void createCheckBoxes(ArrayList<QuoteSource> sources) {
+        PreferenceCategory category = (PreferenceCategory)findPreference("external_category");
+        for (QuoteSource source: sources) {
+            CheckBoxPreference boxPreference = new CheckBoxPreference(this.getActivity().getBaseContext());
+            boxPreference.setKey(source.key);
+            boxPreference.setTitle(source.title);
+            boxPreference.setSummary(source.description);
+            boxPreference.setDefaultValue(false);
+            category.addPreference(boxPreference);
         }
     }
 

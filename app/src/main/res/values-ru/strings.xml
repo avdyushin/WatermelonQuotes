@@ -36,9 +36,10 @@
     <string name="not_found">Цитаты не найдены</string>
 
     <plurals name="found_quotes">
-        <item quantity="one">Найдена %1$d цитата</item>
-        <item quantity="many">Найдено %1$d цитат</item>
-        <item quantity="few">Найдено %1$d цитат</item>
+        <item quantity="one">Найдена %d цитата</item>
+        <item quantity="many">Найдено %d цитат</item>
+        <item quantity="other">Найдено %d цитаты</item>
+        <item quantity="few">Найдено %d цитат</item>
     </plurals>
 
     <string name="pref_background">Цвет фона</string>
