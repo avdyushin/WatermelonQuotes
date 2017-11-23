@@ -30,13 +30,14 @@
 
     <PreferenceCategory
         android:key="biter_quotes"
-        android:title="@string/ru_biter"
+        android:title="@string/ru_biter_title"
         android:summary="@string/ru_biter_sum">
 
         <MultiSelectListPreference
             android:key="biter_quotes_key"
-            android:dialogTitle="@string/ru_biter"
-            android:title="@string/ru_biter_sum"
+            android:dialogTitle="@string/ru_biter_title"
+            android:title="@string/ru_biter"
+            android:summary="@string/ru_biter_sum"
             android:entries="@array/biter_names"
             android:entryValues="@array/biter_values"
             android:defaultValue="@array/empty_array"/>
@@ -47,13 +48,11 @@
         android:key="external_category"
         android:title="@string/external_storage">
 
-        <MultiSelectListPreference
+        <PreferenceScreen
             android:key="external_sources"
-            android:title=""
-            android:summary=""
-            android:entries="@array/empty_array"
-            android:entryValues="@array/empty_array"
-            android:defaultValue="@array/empty_array"/>
+            android:title="@string/no_permissions"
+            android:summary="@string/requires_external"
+            android:enabled="false" />
 
     </PreferenceCategory>
 

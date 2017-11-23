@@ -33,10 +33,12 @@
     <string name="select_quotes_title">Выберите источник цитат</string>
     <string name="select_quotes">Выберите хотя бы один источник цитат</string>
 
+    <string name="not_found">Цитаты не найдены</string>
+
     <plurals name="found_quotes">
         <item quantity="one">Найдена %1$d цитата</item>
-        <item quantity="few">Найдено %1$d цитат</item>
         <item quantity="many">Найдено %1$d цитат</item>
+        <item quantity="few">Найдено %1$d цитат</item>
     </plurals>
 
     <string name="pref_background">Цвет фона</string>
@@ -52,7 +54,8 @@
     <string name="cn_bible">Китайская Библия</string>
     <string name="cn_bible_sum">Цитаты из Библии CNV</string>
 
-    <string name="ru_biter">Цитаты от Байтера</string>
-    <string name="ru_biter_sum">Нажмите чтобы выбрать русскоязычные цитаты из разных источников</string>
+    <string name="ru_biter_title">Цитаты от Байтера</string>
+    <string name="ru_biter">Русскоязычные цитаты из разных источников</string>
+    <string name="ru_biter_sum">Нажмите чтобы выбрать</string>
 
 </resources>

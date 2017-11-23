@@ -35,8 +35,9 @@
     <string name="select_quotes_title">Please select source</string>
     <string name="select_quotes">Please select at least one quotes source</string>
 
+    <string name="not_found">No quotes found</string>
+
     <plurals name="found_quotes">
-        <item quantity="zero">No quotes found</item>
         <item quantity="one">Found %1$d quote</item>
         <item quantity="many">Found %1$d quotes</item>
     </plurals>
@@ -54,7 +55,8 @@
     <string name="cn_bible">Chinese Bible</string>
     <string name="cn_bible_sum">Quotes from CNV Chinese Bible</string>
 
-    <string name="ru_biter">Russian by Biter</string>
-    <string name="ru_biter_sum">Tap to select different quotes</string>
+    <string name="ru_biter_title">Russian by Biter</string>
+    <string name="ru_biter">More quotes sources in Russian</string>
+    <string name="ru_biter_sum">Tap to select</string>
 
 </resources>
