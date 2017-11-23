@@ -9,7 +9,6 @@ import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -37,7 +36,8 @@ public class SettingsFragment extends PreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object selected) {
                 if (selected instanceof Set) {
-                    updateSummary(preference, (Set<String>) selected);
+                    //noinspection unchecked
+                    updateSummary(preference, (Set<String>)selected);
                 }
                 return true;
             }
@@ -78,22 +78,17 @@ public class SettingsFragment extends PreferenceFragment {
         Log.d("TAG", "Params " + hasStorage + ", " + granted);
         if (hasStorage) {
             if (granted) {
-                ArrayList<QuoteSource> installed = FilesProvider.userInstalledQuotes();
+                ArrayList<QuoteSource> installed = ExternalSourceProvider.userInstalledQuotes();
                 int total = installed.size();
-                if (total > 0) {
-                    help.setTitle("Place your files into: " + FilesProvider.QUOTES_PATH);
-                    help.setSummary(getString(R.string.found_quotes, total));
-                } else {
-                    help.setTitle("Place your files into: " + FilesProvider.QUOTES_PATH);
-                    help.setSummary(R.string.no_quotes_installed);
-                }
+                help.setTitle(getString(R.string.put_quotes, ExternalSourceProvider.QUOTES_PATH));
+                help.setSummary(getResources().getQuantityString(R.plurals.found_quotes, total));
             } else {
-                help.setTitle("You didn't grant permissions to read external storage");
-                help.setSummary(R.string.no_quotes_installed);
+                help.setTitle(R.string.no_permissions);
+                help.setSummary(R.string.requires_external);
             }
         } else {
-            help.setTitle("You have not external storage");
-            help.setSummary(R.string.no_quotes_installed);
+            help.setTitle(R.string.no_external_storage);
+            help.setSummary(R.string.requires_external);
         }
     }
 

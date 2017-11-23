@@ -25,23 +25,19 @@
     <string name="settings">Настройки</string>
     <string name="preinstalled">Встроенные цитаты</string>
     <string name="external_storage">Цитаты на карте памяти</string>
-    <string name="no_quotes_installed">Нет установленных цитат</string>
     <string name="appearance">Внешний вид</string>
-    <string name="background_color">Цвет фона</string>
-    <string name="text_color">Цвет текста</string>
-    <string name="color_is">Цвет: %1$s</string>
     <string name="put_quotes">Помести ваши цитаты сюда: %1$s</string>
     <string name="no_external_storage">Внешняя карта памяти не найдена</string>
+    <string name="no_permissions">Требуется доступ к внешней карте памяти</string>
     <string name="requires_external">Для этой опции требуется внешняя память</string>
     <string name="select_quotes_title">Выберите источник цитат</string>
     <string name="select_quotes">Выберите хотя бы один источник цитат</string>
-    <string name="installed_quotes">Установлены цитаты</string>
-    <string name="found_quotes">Найдено цитат: %1$d</string>
-    <string name="howto_install">Для установки виджета перейдите в виджеты и перетащите виджет watermelon на ваш экран.</string>
 
-    <!-- Color Picker -->
-    <string name="dialog_color_picker">Выбор цвета</string>
-    <string name="press_color_to_apply">Нажмите на цвета для выбора</string>
+    <plurals name="found_quotes">
+        <item quantity="one">Найдена %1$d цитата</item>
+        <item quantity="few">Найдено %1$d цитат</item>
+        <item quantity="many">Найдено %1$d цитат</item>
+    </plurals>
 
     <string name="pref_background">Цвет фона</string>
     <string name="pref_foreground">Цвет текста</string>

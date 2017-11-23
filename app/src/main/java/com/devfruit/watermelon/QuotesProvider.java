@@ -2,10 +2,8 @@ package com.devfruit.watermelon;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Environment;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -43,7 +41,7 @@ class QuotesProvider {
             inputStream = context.getResources().openRawResource(resourceId);
         } else {
             try {
-                inputStream = new FileInputStream(FilesProvider.filePathForSource(source));
+                inputStream = new FileInputStream(ExternalSourceProvider.filePathForSource(source));
             } catch (FileNotFoundException e) {
                 inputStream = context.getResources().openRawResource(R.raw.src_bible_en);
             }

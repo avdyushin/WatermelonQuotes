@@ -19,10 +19,11 @@ class QuoteSource {
     }
 }
 
-class FilesProvider {
+class ExternalSourceProvider {
 
-    static final String TAG = "Quotes";
-    static final String EXTERNAL_PATH = Environment.getExternalStorageDirectory().getAbsolutePath();
+    private static final String TAG = ExternalSourceProvider.class.getName();
+
+    private static final String EXTERNAL_PATH = Environment.getExternalStorageDirectory().getAbsolutePath();
     static final String QUOTES_PATH = EXTERNAL_PATH + File.separator + "watermelon";
 
     static String filePathForSource(String source) {

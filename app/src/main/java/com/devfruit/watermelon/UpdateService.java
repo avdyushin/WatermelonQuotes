@@ -14,7 +14,7 @@ import android.widget.RemoteViews;
 
 public class UpdateService extends Service {
 
-    static final String TAG = "Quotes";
+    static final String TAG = UpdateService.class.getName();
 
     @Override
     public IBinder onBind(Intent intent) {
