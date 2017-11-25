@@ -63,8 +63,18 @@ public class UpdateService extends Service {
     static void updateAppWidget(Context context, int appWidgetId) {
         // Get configuration for widget with given id
         String quote = new QuotesProvider().getNextQuote(context, appWidgetId);
+
+        String [] quoteAndSource = quote.split("\\\\");
+        String text = quote;
+        String source = "";
+
+        if( quoteAndSource.length >= 2 ) {
+            text = "\"" + quoteAndSource[0].trim() + "\"";
+            source = "~ " + quoteAndSource[quoteAndSource.length - 1];
+        }
+
         Appearance appearance = new Appearance(context, appWidgetId);
-        Bitmap bitmap = Renderer.renderQuote(appearance, quote);
+        Bitmap bitmap = Renderer.renderQuote(appearance, text, source);
 
         // Configure remove views
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);

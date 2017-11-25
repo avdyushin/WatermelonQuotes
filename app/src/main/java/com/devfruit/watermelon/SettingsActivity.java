@@ -2,6 +2,7 @@ package com.devfruit.watermelon;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -86,14 +87,14 @@ public class SettingsActivity extends PreferenceActivity {
         allSources.addAll(biterSource);
         allSources.addAll(externalSource);
 
-        Set<String> selected = preferences.getStringSet("biter_quotes_key", null);
+        Set<String> selected = preferences.getStringSet("biter_quotes_key", new HashSet<String>());
 
         Log.d(TAG,"All sources: " + allSources.toString());
 
         boolean hasSources = false;
         int i = 0;
         for (String key: allSources) {
-            if(preferences.getBoolean(key, false) || (selected != null && selected.contains(key))) {
+            if(preferences.getBoolean(key, false) || (selected.contains(key))) {
                 String config_key = appWidgetId + "_use_source_" + (i++);
                 editor.putString(config_key, key);
                 hasSources = true;

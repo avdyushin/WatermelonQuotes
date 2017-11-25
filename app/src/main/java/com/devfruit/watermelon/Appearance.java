@@ -11,14 +11,14 @@ class Appearance {
 
     int width;
     int height;
-    float density;
-    Typeface font;
     int foreground;
     int background;
+    Typeface font;
+    DisplayMetrics metrics;
 
     Appearance(Context context, int appWidgetId) {
         SharedPreferences settings = UserSettings.shared(context);
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        metrics = context.getResources().getDisplayMetrics();
 
         AppWidgetManager manager = AppWidgetManager.getInstance(context);
         Bundle options = manager.getAppWidgetOptions(appWidgetId);
@@ -44,7 +44,6 @@ class Appearance {
             }
         }
 
-        density = context.getResources().getDisplayMetrics().density;
         background = settings.getInt(appWidgetId + "_background", 0x80000000);
         foreground = settings.getInt(appWidgetId + "_foreground", 0xFFFFFFFF);
 
