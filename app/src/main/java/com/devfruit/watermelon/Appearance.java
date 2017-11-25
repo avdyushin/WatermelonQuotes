@@ -11,11 +11,9 @@ class Appearance {
 
     int width;
     int height;
-    float density;
-    int densityDpi;
-    Typeface font;
     int foreground;
     int background;
+    Typeface font;
     DisplayMetrics metrics;
 
     Appearance(Context context, int appWidgetId) {
@@ -45,9 +43,6 @@ class Appearance {
                 height = maxHeight;
             }
         }
-
-        density = context.getResources().getDisplayMetrics().density;
-        densityDpi = context.getResources().getDisplayMetrics().densityDpi;
 
         background = settings.getInt(appWidgetId + "_background", 0x80000000);
         foreground = settings.getInt(appWidgetId + "_foreground", 0xFFFFFFFF);
