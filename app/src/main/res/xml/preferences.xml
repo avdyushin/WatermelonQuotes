@@ -2,11 +2,12 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="screen_main">
 
     <PreferenceCategory
-        android:title="@string/preinstalled"
-        android:key="buildin_category">
+        android:key="build_in_category"
+        android:title="@string/preinstalled">
 
         <CheckBoxPreference
             android:key="src_bible_en"
@@ -26,23 +27,33 @@
             android:summary="@string/cn_bible_sum"
             android:defaultValue="false"/>
 
-        <CheckBoxPreference
-            android:key="src_classics_biter"
-            android:title="@string/biter_classic"
-            android:summary="@string/biter_classic_sum"
-            android:defaultValue="false"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="biter_quotes"
+        android:title="@string/ru_biter_title"
+        android:summary="@string/ru_biter_sum">
+
+        <MultiSelectListPreference
+            android:key="biter_quotes_key"
+            android:dialogTitle="@string/ru_biter_title"
+            android:title="@string/ru_biter"
+            android:summary="@string/ru_biter_sum"
+            android:entries="@array/biter_names"
+            android:entryValues="@array/biter_values"
+            android:defaultValue="@array/empty_array"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/external_storage"
-        android:key="external_category">
+        android:key="external_category"
+        android:title="@string/external_storage">
 
         <PreferenceScreen
-                android:title="@string/no_quotes_installed"
-                android:summary=""
-                android:key="external_help">
-        </PreferenceScreen>
+            android:key="external_sources"
+            android:title="@string/no_permissions"
+            android:summary="@string/requires_external"
+            android:enabled="false" />
 
     </PreferenceCategory>
 
@@ -53,14 +64,14 @@
         <com.jaredrummler.android.colorpicker.ColorPreference
             android:key="foreground"
             android:title="@string/pref_foreground"
-            android:summary="@string/pref_foreground_sum"
-            android:defaultValue="0xEEFFFFFF"/>
+            android:defaultValue="0xEEFFFFFF"
+            app:cpv_showAlphaSlider="true"/>
 
         <com.jaredrummler.android.colorpicker.ColorPreference
             android:key="background"
             android:title="@string/pref_background"
-            android:summary="@string/pref_background_sum"
-            android:defaultValue="0x80000000"/>
+            android:defaultValue="0x80000000"
+            app:cpv_showAlphaSlider="true"/>
 
     </PreferenceCategory>
 </PreferenceScreen>

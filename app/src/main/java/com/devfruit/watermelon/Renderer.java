@@ -7,94 +7,98 @@ import android.graphics.Typeface;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.util.TypedValue;
 
 class Renderer {
 
-    static Bitmap renderQuote(Appearance appearance, String text) {
+    static Bitmap renderQuote(Appearance appearance, String text, String source) {
 
-        Bitmap bitmap = Bitmap.createBitmap(
-                appearance.width, appearance.height, Bitmap.Config.ARGB_4444
+        int w = (int)TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, appearance.width, appearance.metrics
         );
 
+        int h = (int)TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, appearance.height, appearance.metrics
+        );
+
+        float minTextSize = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 8, appearance.metrics
+        );
+
+        int padding = (int)TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 8, appearance.metrics
+        );
+
+        Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_4444);
         Canvas canvas = new Canvas(bitmap);
         Paint paint = new Paint();
 
-        int srcTextSize = (int)(11 * appearance.density + 0.5f);
-        int textSize = srcTextSize;
+        // Fill background
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(appearance.background);
+        canvas.drawRect(0, 0, w, h, paint);
 
-        // Setup default paint style
+        // Prepare text settings
         paint.setAntiAlias(true);
         paint.setSubpixelText(true);
-        paint.setStyle(Paint.Style.FILL);
         paint.setColor(appearance.foreground);
-        paint.setTextSize(textSize);
-        paint.setTextAlign(Paint.Align.LEFT);
-
-        // Split string into quote and source of quote
-        String[] quoteAndSource = text.split("\\\\");
-        String quote = text;
-        String source = "";
-
-        if( quoteAndSource.length >= 2 ) {
-            quote = "\"" + quoteAndSource[0].trim() + "\"";
-            source = " ~ " + quoteAndSource[quoteAndSource.length - 1];
-        }
-
-        // Two text paints, one for quote, second to source
+        paint.setAlpha(250);
+        paint.setTextSize(minTextSize);
 
         if( appearance.font != null ) {
             paint.setTypeface(appearance.font);
         } else {
             paint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD));
         }
-        paint.setAlpha(250);
-        StaticLayout layout = new StaticLayout(quote, new TextPaint(paint), appearance.width, Layout.Alignment.ALIGN_CENTER, 0.73f, -0.4f, false);
 
-        // Update font size
+        float maxHeight = (h - padding * 2) * 0.8f;
+
+        // Quote text
+        StaticLayout layout;
+        do  {
+            paint.setTextSize(minTextSize += 0.25f);
+            layout = new StaticLayout(
+                    text, new TextPaint(paint), w - padding * 2,
+                    Layout.Alignment.ALIGN_CENTER, 0.73f, -0.4f, false
+            );
+        } while (layout.getHeight() < maxHeight);
+
+        paint.setTextSize(minTextSize - 0.5f);
+        layout = new StaticLayout(
+                text, new TextPaint(paint), w - padding * 2,
+                Layout.Alignment.ALIGN_CENTER, 0.73f, -0.4f, false
+        );
+
         canvas.save();
-        textSize = srcTextSize;
-        while ( (layout.getHeight()) < appearance.height/2.2 ) {
-            paint.setTextSize(textSize++);
-            layout = new StaticLayout(quote, new TextPaint(paint), appearance.width, Layout.Alignment.ALIGN_CENTER, 0.73f, -0.4f, false);
-        }
+        canvas.translate(padding, padding);
+        layout.draw(canvas);
+        canvas.restore();
 
-        paint.setTextSize(textSize - 2);
-        layout = new StaticLayout(quote, new TextPaint(paint), appearance.width, Layout.Alignment.ALIGN_CENTER, 0.73f, -0.4f, false);
+        int textHeight = layout.getHeight();
 
-        float delta;
-
-        if( appearance.width/appearance.height > 3 ) {
-            // slim
-            delta = 10;
-        } else {
-            delta = 30;
-        }
-
-        float dy = (appearance.height - layout.getHeight()) / 2 - delta - 5;
-
-        // Debug only:
-        paint.setColor(appearance.background);
-        canvas.drawRect(0, 0, appearance.width, appearance.height, paint);
+        // Quote source
 
         paint.setColor(appearance.foreground);
-        paint.setAlpha(100);
-
-        canvas.translate(0, dy); //position the text
-        layout.draw(canvas);
-
-        // Source
-        canvas.restore();
-        canvas.save();
-        paint.setTextSize(appearance.height/6);
+        paint.setTextSize(h/6);
         paint.setTypeface(Typeface.create(Typeface.SERIF, Typeface.ITALIC));
         paint.setAlpha(150);
-        layout = new StaticLayout(source, new TextPaint(paint), appearance.width, Layout.Alignment.ALIGN_CENTER, 0.85f, -0.3f, false);
-        canvas.translate(0, appearance.height - appearance.height/3 + appearance.height/20);
-        layout.draw(canvas);
+        layout = new StaticLayout(
+                source, new TextPaint(paint), w - padding * 2,
+                Layout.Alignment.ALIGN_CENTER, 0.85f, -0.3f, false
+        );
 
+        float dy = (h - padding - textHeight - layout.getHeight() - padding) / 2.0f;
+
+        canvas.save();
+        canvas.translate(padding, textHeight + padding + dy);
+        layout.draw(canvas);
         canvas.restore();
-        canvas.drawLine(appearance.width/5, 4, appearance.width-appearance.width/5, 4, paint);
-        canvas.drawLine(appearance.width/5, appearance.height-4, appearance.width-appearance.width/5, appearance.height-4, paint);
+
+        // Top and bottom lines
+//        paint.setColor(appearance.foreground);
+//        paint.setAlpha(150);
+//        canvas.drawLine(w/5, 4, w-w/5, 4, paint);
+//        canvas.drawLine(w/5, h-4, w-w/5, h-4, paint);
 
         return bitmap;
     }

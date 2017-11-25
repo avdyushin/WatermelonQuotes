@@ -5,8 +5,9 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@android:id/list"
+    <fragment
+        android:id="@+id/mainPreferences"
+        android:name="com.devfruit.watermelon.SettingsFragment"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>

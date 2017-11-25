@@ -2,10 +2,8 @@ package com.devfruit.watermelon;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Environment;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,8 +26,8 @@ class QuotesProvider {
                 sources.add(s);
             }
         }
-        String source = "src_bible_en";
 
+        String source = "src_bible_en";
         if( sources.size() > 1 ) {
             int r = (new Random().nextInt(sources.size()));
             source = sources.get(r);
@@ -38,36 +36,24 @@ class QuotesProvider {
         }
 
         InputStream inputStream;
-        switch (source) {
-            case "src_bible_en":
+        int resourceId = context.getResources().getIdentifier(source, "raw", context.getPackageName());
+        if (resourceId != 0) {
+            inputStream = context.getResources().openRawResource(resourceId);
+        } else {
+            try {
+                inputStream = new FileInputStream(ExternalSourceProvider.filePathForSource(source));
+            } catch (FileNotFoundException e) {
                 inputStream = context.getResources().openRawResource(R.raw.src_bible_en);
-                break;
-            case "src_bible_ru":
-                inputStream = context.getResources().openRawResource(R.raw.src_bible_ru);
-                break;
-            case "src_bible_cn":
-                inputStream = context.getResources().openRawResource(R.raw.src_bible_cn);
-                break;
-            case "src_classics_biter":
-                inputStream = context.getResources().openRawResource(R.raw.src_classics_biter);
-                break;
-            default:
-                String sdpath = Environment.getExternalStorageDirectory().getAbsolutePath();
-                try {
-                    inputStream = new FileInputStream(sdpath + File.separator + SettingsActivity.DOTPATH + File.separator + source);
-                } catch (FileNotFoundException e) {
-                    inputStream = context.getResources().openRawResource(R.raw.src_bible_en);
-                }
-                break;
+            }
         }
 
-        InputStreamReader inputreader = new InputStreamReader(inputStream);
-        BufferedReader buffreader = new BufferedReader(inputreader);
+        InputStreamReader input_reader = new InputStreamReader(inputStream);
+        BufferedReader buffered_reader = new BufferedReader(input_reader);
         String line;
         List<String> array = new ArrayList<>();
         int skipper = 0;
         try {
-            while( (line = buffreader.readLine()) != null ) {
+            while( (line = buffered_reader.readLine()) != null ) {
                 if( skipper++ > 1 ) {
                     if( !line.trim().equals("") ) {
                         array.add(line);

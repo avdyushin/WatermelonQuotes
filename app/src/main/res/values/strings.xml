@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="biter_names">
+        <item>Classics</item>
+        <item>Definitions</item>
+        <item>English</item>
+        <item>Fomenko</item>
+        <item>Omar Hayam</item>
+        <item>Ezhi Lec</item>
+        <item>Love</item>
+        <item>Great mathematics</item>
+        <item>Merphi</item>
+        <item>Motivation</item>
+        <item>Proverbs</item>
+        <item>Sayings</item>
+        <item>Prutkov</item>
+        <item>Seneka</item>
+    </string-array>
+
+    <string-array name="empty_array"/>
+
     <string name="app_name">Watermelon Quotes</string>
 
     <string name="widget_name">Watermelon</string>
@@ -8,29 +27,24 @@
     <string name="settings">Settings</string>
     <string name="preinstalled">Preinstalled quotes</string>
     <string name="external_storage">External storage quotes</string>
-    <string name="no_quotes_installed">No quotes installed</string>
     <string name="appearance">Appearance</string>
-    <string name="background_color">Background color</string>
-    <string name="text_color">Text color</string>
-    <string name="color_is">Color is: %1$s</string>
-    <string name="put_quotes">Put your quotes into %1$s</string>
+    <string name="put_quotes">Place your quotes into %1$s</string>
     <string name="no_external_storage">No external storage found</string>
+    <string name="no_permissions">No permissions to external storage given</string>
     <string name="requires_external">This option requires external storage</string>
     <string name="select_quotes_title">Please select source</string>
     <string name="select_quotes">Please select at least one quotes source</string>
-    <string name="installed_quotes">Installed demo quotes</string>
-    <string name="found_quotes">Found %1$d quote(s)</string>
-    <string name="howto_install">To install widget goto widgets and drag and drop watermelon widget into your screen.</string>
 
-    <!-- Color Picker -->
-    <string name="dialog_color_picker">Color Picker</string>
-    <string name="press_color_to_apply">Press on Color to apply</string>
+    <string name="not_found">No quotes found</string>
+
+    <plurals name="found_quotes">
+        <item quantity="one">Found %d quote</item>
+        <item quantity="many">Found %d quotes</item>
+        <item quantity="other">Found %d quotes</item>
+    </plurals>
 
     <string name="pref_background">Background color</string>
-    <string name="pref_background_sum">Color: %1$s</string>
-
     <string name="pref_foreground">Text color</string>
-    <string name="pref_foreground_sum">Color: %1$s</string>
 
     <!--  Quotes -->
     <string name="en_bible">English Bible</string>
@@ -42,7 +56,8 @@
     <string name="cn_bible">Chinese Bible</string>
     <string name="cn_bible_sum">Quotes from CNV Chinese Bible</string>
 
-    <string name="biter_classic">Classics</string>
-    <string name="biter_classic_sum">Classics quotes</string>
+    <string name="ru_biter_title">Russian by Biter</string>
+    <string name="ru_biter">More quotes sources in Russian</string>
+    <string name="ru_biter_sum">Tap to select</string>
 
 </resources>

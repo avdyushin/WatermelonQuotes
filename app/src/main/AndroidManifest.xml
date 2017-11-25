@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.devfruit.watermelon">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -13,15 +13,15 @@
 
         <receiver android:name=".WidgetProvider" android:label="@string/widget_name">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
-                <action android:name="android.appwidget.action.APPWIDGET_DISABLED" />
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_ENABLED"/>
+                <action android:name="android.appwidget.action.APPWIDGET_DISABLED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_info"/>
         </receiver>
 
-        <service android:name=".UpdateService" />
+        <service android:name=".UpdateService"/>
 
         <activity
             android:name=".SettingsActivity"
@@ -29,7 +29,7 @@
             android:exported="false">
 
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
             </intent-filter>
         </activity>
     </application>
