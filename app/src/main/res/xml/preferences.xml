@@ -2,6 +2,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="screen_main">
 
     <PreferenceCategory
@@ -63,12 +64,14 @@
         <com.jaredrummler.android.colorpicker.ColorPreference
             android:key="foreground"
             android:title="@string/pref_foreground"
-            android:defaultValue="0xEEFFFFFF"/>
+            android:defaultValue="0xEEFFFFFF"
+            app:cpv_showAlphaSlider="true"/>
 
         <com.jaredrummler.android.colorpicker.ColorPreference
             android:key="background"
             android:title="@string/pref_background"
-            android:defaultValue="0x80000000"/>
+            android:defaultValue="0x80000000"
+            app:cpv_showAlphaSlider="true"/>
 
     </PreferenceCategory>
 </PreferenceScreen>
