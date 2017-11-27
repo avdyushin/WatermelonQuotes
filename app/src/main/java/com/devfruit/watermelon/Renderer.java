@@ -56,7 +56,7 @@ class Renderer {
         // Quote text
         StaticLayout layout;
         do  {
-            paint.setTextSize(minTextSize += 0.25f);
+            paint.setTextSize(minTextSize += 0.5f);
             layout = new StaticLayout(
                     text, new TextPaint(paint), w - padding * 2,
                     Layout.Alignment.ALIGN_CENTER, 0.73f, -0.4f, false
@@ -79,13 +79,17 @@ class Renderer {
         // Quote source
 
         paint.setColor(appearance.foreground);
-        paint.setTextSize(h/6);
         paint.setTypeface(Typeface.create(Typeface.SERIF, Typeface.ITALIC));
         paint.setAlpha(150);
-        layout = new StaticLayout(
-                source, new TextPaint(paint), w - padding * 2,
-                Layout.Alignment.ALIGN_CENTER, 0.85f, -0.3f, false
-        );
+
+        float maxSourceText = h/6;
+        do {
+            paint.setTextSize(maxSourceText -= 0.5f);
+            layout = new StaticLayout(
+                    source, new TextPaint(paint), w - padding * 2,
+                    Layout.Alignment.ALIGN_CENTER, 0.85f, -0.3f, false
+            );
+        } while (layout.getHeight() > (h - maxHeight));
 
         float dy = (h - padding - textHeight - layout.getHeight() - padding) / 2.0f;
 

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-class QuotesProvider {
+class QuoteProvider {
 
     String getNextQuote(Context context, int appWidgetId) {
         SharedPreferences settings = UserSettings.shared(context);

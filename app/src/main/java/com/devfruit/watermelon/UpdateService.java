@@ -62,7 +62,7 @@ public class UpdateService extends Service {
 
     static void updateAppWidget(Context context, int appWidgetId) {
         // Get configuration for widget with given id
-        String quote = new QuotesProvider().getNextQuote(context, appWidgetId);
+        String quote = new QuoteProvider().getNextQuote(context, appWidgetId);
 
         String [] quoteAndSource = quote.split("\\\\");
         String text = quote;

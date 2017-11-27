@@ -10,17 +10,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-class QuoteSource {
-    String key;
-    String title;
-    String description;
-    QuoteSource(String key, String title, String description) {
-        this.key = key;
-        this.title = title;
-        this.description = description;
-    }
-}
-
 class ExternalSourceProvider {
 
     private static final String TAG = ExternalSourceProvider.class.getName();
