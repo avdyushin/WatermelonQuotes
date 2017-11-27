@@ -1,49 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
+    <string-array name="biter_names">
+        <item>Классика</item>
+        <item>Определения</item>
+        <item>Английский</item>
+        <item>Омар Хаям</item>
+        <item>Ежи Лец</item>
+        <item>Любовь</item>
+        <item>Великие математики</item>
+        <item>Законы Мерфи</item>
+        <item>Мотивация</item>
+        <item>Поговорки</item>
+        <item>Пословицы</item>
+        <item>Козьма Прутков</item>
+        <item>Сенека</item>
+    </string-array>
+
     <string name="app_name">Цитаты Watermelon</string>
-    
-    <string name="widget_4x1">Watermelon 4x1</string>
-    <string name="widget_4x2">Watermelon 4x2</string>
-    
+
+    <string name="widget_name">Watermelon</string>
+
     <string name="settings">Настройки</string>
     <string name="preinstalled">Встроенные цитаты</string>
     <string name="external_storage">Цитаты на карте памяти</string>
-    <string name="no_quotes_installed">Нет установленных цитат</string>
     <string name="appearance">Внешний вид</string>
-    <string name="background_color">Цвет фона</string>
-    <string name="text_color">Цвет текста</string>
-    <string name="color_is">Цвет: %1$s</string>
     <string name="put_quotes">Помести ваши цитаты сюда: %1$s</string>
     <string name="no_external_storage">Внешняя карта памяти не найдена</string>
+    <string name="no_permissions">Требуется доступ к внешней карте памяти</string>
     <string name="requires_external">Для этой опции требуется внешняя память</string>
+    <string name="select_quotes_title">Выберите источник цитат</string>
     <string name="select_quotes">Выберите хотя бы один источник цитат</string>
-    <string name="installed_quotes">Установлены цитаты</string>
-    <string name="found_quotes">Найдено цитат: %1$d</string>
-    <string name="howto_install">Для установки виджета перейдите в виджеты и перетащите виджет watermelon на ваш экран.</string>
-    
-    <!-- Color Picker -->
-    <string name="dialog_color_picker">Выбор цвета</string>
-    <string name="press_color_to_apply">Нажмите на цвета для выбора</string>
-    
-    
-	<string name="pref_background">Цвет фона</string>
-	<string name="pref_background_sum">Цвет: %1$s</string>
 
-	<string name="pref_foreground">Цвет текста</string>
-	<string name="pref_foreground_sum">Цвет: %1$s</string>
-	
-	<!--  Quotes -->
-	<string name="en_bible">Английская Библия</string>
-	<string name="en_bible_sum">Цитаты из Библии KJV</string>
+    <string name="not_found">Цитаты не найдены</string>
 
-	<string name="ru_bible">Русская Библия</string>
-	<string name="ru_bible_sum">Цитаты из синодального перевода</string>
-	
-	<string name="cn_bible">Китайская Библия</string>
-	<string name="cn_bible_sum">Цитаты из Библии CNV</string>
+    <plurals name="found_quotes">
+        <item quantity="one">Найдена %d цитата</item>
+        <item quantity="many">Найдено %d цитат</item>
+        <item quantity="other">Найдено %d цитаты</item>
+        <item quantity="few">Найдено %d цитат</item>
+    </plurals>
 
-    <string name="biter_classic">Классика</string>
-    <string name="biter_classic_sum">Цитаты классиков</string>
+    <string name="pref_background">Цвет фона</string>
+    <string name="pref_foreground">Цвет текста</string>
+    
+    <!--  Quotes -->
+    <string name="en_bible">Английская Библия</string>
+    <string name="en_bible_sum">Цитаты из Библии KJV</string>
+
+    <string name="ru_bible">Русская Библия</string>
+    <string name="ru_bible_sum">Цитаты из синодального перевода</string>
+
+    <string name="cn_bible">Китайская Библия</string>
+    <string name="cn_bible_sum">Цитаты из Библии CNV</string>
+
+    <string name="ru_biter_title">Цитаты от Байтера</string>
+    <string name="ru_biter">Русскоязычные цитаты из разных источников</string>
+    <string name="ru_biter_sum">Нажмите чтобы выбрать</string>
 
 </resources>

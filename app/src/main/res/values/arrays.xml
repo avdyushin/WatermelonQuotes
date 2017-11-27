@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="biter_values">
+        <item>src_classics_biter</item>
+        <item>src_definition_biter</item>
+        <item>src_english_biter</item>
+        <item>src_hayam_biter</item>
+        <item>src_lec_biter</item>
+        <item>src_love_biter</item>
+        <item>src_math_ru</item>
+        <item>src_merphi_biter</item>
+        <item>src_motivation_biter</item>
+        <item>src_pogovorki_biter</item>
+        <item>src_poslovitsi_biter</item>
+        <item>src_prutkov_biter</item>
+        <item>src_seneka_biter</item>
+    </array>
+</resources>
