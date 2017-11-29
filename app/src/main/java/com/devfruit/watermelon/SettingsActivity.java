@@ -105,6 +105,8 @@ public class SettingsActivity extends PreferenceActivity {
         editor.putInt(appWidgetId + "_foreground", foregroundColor);
         editor.apply();
 
+        Analytics.logSourceCount(this, i);
+
         Log.d(TAG,"Selected sources count: " + i);
 
         if (hasSources) {
